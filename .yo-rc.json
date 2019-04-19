@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "nick fan",
+      "authorEmail": "",
+      "authorUrl": "https://github.com/nickfan"
+    }
+  }
+}
