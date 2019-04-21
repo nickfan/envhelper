@@ -10,13 +10,14 @@ export class EnvHelper {
   constructor(env) {
     this.instance = null;
     this._env = env;
+    this._envDefault = "local";
     this._envLabelMap = {
-      dev: ["dev", "develop", "development"],
-      test: ["test", "testing"],
-      prod: ["pub", "public", "prod", "production", "ol", "online"],
+      development: ["dev", "develop", "development"],
+      testing: ["test", "testing"],
+      production: ["pub", "public", "prod", "production", "ol", "online"],
       local: ["my", "local"]
     };
-    this._envLabelAliasMap = null;
+    this._envAliasLabelMap = null;
   }
 
   static getInstance(env) {
@@ -42,17 +43,40 @@ export class EnvHelper {
     this._envLabelMap = value;
   }
 
-  get envLabelAliasMap() {
-    return this._envLabelAliasMap;
+  get envAliasLabelMap() {
+    return this._envAliasLabelMap;
   }
 
-  set envLabelAliasMap(value) {
-    this._envLabelAliasMap = value;
+  getEnvLabelMap() {
+    return this._envLabelMap;
+  }
+
+  setEnvLabelMap(value) {
+    this._envLabelMap = value;
+  }
+
+  cleanupAliasLabelMap() {
+    this._envAliasLabelMap = null;
+  }
+
+  set envAliasLabelMap(value) {
+    this._envAliasLabelMap = value;
+  }
+
+  getEnvLabelAliasListByEnvLabel(label) {
+    if (this.getEnvLabels().includes(label)) {
+      return this._envLabelMap[label];
+    }
+  }
+
+  setEnvLabelAliasListByEnvLabel(label, aliasList) {
+    this._envLabelMap[label] = aliasList;
+    this.cleanupAliasLabelMap();
   }
 
   /**
    * 读取环境标识
-   * @returns {string|*}
+   * @returns {string|*} 当前环境标识
    */
   getEnv() {
     if (this._env) {
@@ -63,8 +87,8 @@ export class EnvHelper {
 
   /**
    * 设置环境标识
-   * @param env
-   * @returns {EnvHelper}
+   * @param {string|*} env 环境标识
+   * @returns {EnvHelper} 当前实例对象
    */
   setEnv(env) {
     this._env = env;
@@ -73,57 +97,62 @@ export class EnvHelper {
 
   /**
    * 获取所有的属性标识
-   * @returns {string[]|*}
+   * @returns {string[]|*} 所有的环境标识
    */
   getEnvLabels() {
     // Return this._envLabelMap.keys();
     return Object.keys(this._envLabelMap);
   }
 
-  getEnvLabelAliasMap() {
-    if (this._envLabelAliasMap) {
-      return this._envLabelAliasMap;
+  /**
+   * 初始化别名字典
+   * @param {boolean} overwrite 是否覆写
+   */
+  initEnvAliasLabelMap(overwrite = true) {
+    let envLabels = this.getEnvLabels();
+    if (envLabels.length > 0) {
+      this._envAliasLabelMap = {};
+      for (let rowLabel of envLabels) {
+        let rowAliasList = this.getEnvLabelAliasListByEnvLabel(rowLabel);
+        if (rowAliasList.length > 0) {
+          for (let aliasItemName of rowAliasList) {
+            // eslint-disable-next-line max-depth
+            if (overwrite) {
+              this._envAliasLabelMap[aliasItemName] = rowLabel;
+            } else if (!(aliasItemName in this._envAliasLabelMap)) {
+              this._envAliasLabelMap[aliasItemName] = rowLabel;
+            }
+          }
+        }
+      }
     }
+  }
 
-    // Let envLabelAliasMap = {};
-
-    return null;
+  getEnvAliasLabelMap() {
+    if (this._envAliasLabelMap) {
+      return this._envAliasLabelMap;
+    }
+    this.initEnvAliasLabelMap();
+    return this._envAliasLabelMap;
   }
 
   /**
    * 修正env环境标识
-   * @param env
-   * @returns {string}
+   * @param {string|*} env 输入的环境标识
+   * @returns {string} 修正后的环境标识
    */
   fixEnv(env) {
     let vEnv = env;
     if (vEnv === undefined) {
       vEnv = this._env;
     }
-    switch (vEnv) {
-      case "pub":
-      case "public":
-      case "prod":
-      case "production":
-        return "prod";
-      case "test":
-      case "testing":
-        return "test";
-      case "dev":
-      case "develop":
-      case "development":
-        return "dev";
-      case "my":
-      case "local":
-      case "loc":
-      default:
-        return "local";
+    let envAliasLabelMap = this.getEnvAliasLabelMap();
+    if (Object.keys(envAliasLabelMap).includes(vEnv)) {
+      return envAliasLabelMap[vEnv];
     }
+    return this._envDefault;
   }
 }
-// Export default EnvHelper;
-const envhelper = EnvHelper.getInstance();
-// Console.log(envhelper.getEnvLabels());
 
+const envhelper = EnvHelper.getInstance();
 export { envhelper };
-// Modules.export(envhelper);
