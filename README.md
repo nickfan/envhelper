@@ -1,5 +1,5 @@
 # envhelper [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> Environment Label Helper Class
+> Environment Label Helper
 
 ## Installation
 
@@ -12,7 +12,8 @@ $ npm install --save envhelper
 ```js
 const envhelper = require('envhelper');
 
-envhelper('Rainbow');
+envhelper.genEnvUrlByWebUrl("http://dev-mockup.example.com", "testing") === "http://test-mockup.example.com"
+
 ```
 ## License
 
