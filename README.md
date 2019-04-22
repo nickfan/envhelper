@@ -4,7 +4,7 @@
 ## Installation
 
 ```sh
-$ npm install --save envhelper
+$ npm install --save @nickfan/envhelper
 ```
 
 ## Usage
