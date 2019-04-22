@@ -1,9 +1,9 @@
 import { expect } from "chai";
-import { _, envhelper, EnvHelper } from "../src";
+import { envhelper, EnvHelper } from "../src";
 
 describe("EnvHelper test", () => {
   it("EnvHelper get env failed", () => {
-    expect(EnvHelper.getInstance()).to.be.an('object');
+    expect(EnvHelper.getInstance()).to.be.an("object");
   });
 });
 
