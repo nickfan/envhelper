@@ -1,0 +1,12 @@
+{
+  "require": [
+    "@babel/register"
+  ],
+  "reporter": [
+    "lcov",
+    "text",
+    "text-summary"
+  ],
+  "sourceMap": false,
+  "instrument": false
+}

@@ -1,3 +1,5 @@
---reporter tap
+--require @babel/register
 --recursive
+--reporter mochawesome
+--bail
 --growl

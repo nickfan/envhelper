@@ -24,5 +24,17 @@ const plugins = [
     }
   ]
 ];
-
-module.exports = { presets, plugins };
+const env = {
+  test: {
+    plugins: [
+      [
+        "istanbul",
+        {
+          useInlineSourceMaps: false,
+          exclude: ["**/*.spec.js"]
+        }
+      ]
+    ]
+  }
+};
+module.exports = { presets, plugins, env };

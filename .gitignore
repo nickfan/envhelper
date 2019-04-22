@@ -1,11 +1,16 @@
-coverage
-
+/coverage/
+/mochawesome-report/
 
 /dist/*
 !/dist/.gitignore
 
 /lib/*
 !/lib/.gitignore
+
+.env
+.env.my
+.env.local
+.env.production
 
 .history/
 

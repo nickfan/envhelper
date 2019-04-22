@@ -20,11 +20,11 @@ envhelper.genEnvUrlByWebUrl("http://dev-mockup.example.com", "testing") === "htt
 MIT © [nick fan](https://github.com/nickfan)
 
 
-[npm-image]: https://badge.fury.io/js/envhelper.svg
-[npm-url]: https://npmjs.org/package/envhelper
+[npm-image]: https://badge.fury.io/js/%40nickfan%2Fenvhelper.svg
+[npm-url]: https://www.npmjs.com/package/@nickfan/envhelper
 [travis-image]: https://travis-ci.org/nickfan/envhelper.svg?branch=master
 [travis-url]: https://travis-ci.org/nickfan/envhelper
 [daviddm-image]: https://david-dm.org/nickfan/envhelper.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/nickfan/envhelper
-[coveralls-image]: https://coveralls.io/repos/nickfan/envhelper/badge.svg
+[coveralls-image]: https://coveralls.io/repos/r/nickfan/envhelper/badge.svg
 [coveralls-url]: https://coveralls.io/r/nickfan/envhelper
