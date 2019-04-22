@@ -10,7 +10,7 @@ $ npm install --save @nickfan/envhelper
 ## Usage
 
 ```js
-const envhelper = require('envhelper');
+const envhelper = require('@nickfan/envhelper');
 
 envhelper.genEnvUrlByWebUrl("http://dev-mockup.example.com", "testing") === "http://test-mockup.example.com"
 
