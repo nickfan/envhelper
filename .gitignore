@@ -5,6 +5,9 @@ coverage
 /dist/*
 !/dist/.gitignore
 
+/lib/*
+!/lib/.gitignore
+
 .history/
 
 ### Windows template

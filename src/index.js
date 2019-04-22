@@ -33,38 +33,6 @@ class EnvHelper {
     return this.instance;
   }
 
-  get env() {
-    return this._env;
-  }
-
-  set env(value) {
-    this._env = value;
-  }
-
-  get envLabelMap() {
-    return this._envLabelMap;
-  }
-
-  set envLabelMap(value) {
-    this._envLabelMap = value;
-  }
-
-  get envLabelPrefixMap() {
-    return this._envLabelPrefixMap;
-  }
-
-  set envLabelPrefixMap(value) {
-    this._envLabelPrefixMap = value;
-  }
-
-  set envAliasLabelMap(value) {
-    this._envAliasLabelMap = value;
-  }
-
-  get envAliasLabelMap() {
-    return this._envAliasLabelMap;
-  }
-
   getEnvLabelMap() {
     return this._envLabelMap;
   }
