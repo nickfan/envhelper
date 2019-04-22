@@ -56,7 +56,6 @@
     "prepublish": "npm run build",
     "serve": "node ./lib/index.js",
     "debug": "node --inspect-brk ./lib/index.js",
-    "precommit": "lint-staged",
     "pretest": "./node_modules/.bin/eslint .",
     "test": "./node_modules/.bin/mocha",
     "coverage": "./node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/nyc --reporter=lcov --reporter=text ./node_modules/.bin/mocha",
