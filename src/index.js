@@ -285,3 +285,4 @@ class EnvHelper {
 }
 const envhelper = EnvHelper.getInstance();
 export { envhelper, EnvHelper };
+export default envhelper;
