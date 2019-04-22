@@ -26,5 +26,5 @@ MIT © [nick fan](https://github.com/nickfan)
 [travis-url]: https://travis-ci.org/nickfan/envhelper
 [daviddm-image]: https://david-dm.org/nickfan/envhelper.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/nickfan/envhelper
-[coveralls-image]: https://coveralls.io/repos/r/nickfan/envhelper/badge.svg
-[coveralls-url]: https://coveralls.io/r/nickfan/envhelper
+[coveralls-image]: https://coveralls.io/repos/github/nickfan/envhelper/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/nickfan/envhelper?branch=master
