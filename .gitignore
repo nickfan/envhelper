@@ -1,12 +1,11 @@
-node_modules
 coverage
 
 
 /dist/*
 !/dist/.gitignore
 
-/lib/*
-!/lib/.gitignore
+#/lib/*
+#!/lib/.gitignore
 
 .history/
 
@@ -213,3 +212,5 @@ Session.vim
 tags
 # Persistent undo
 [._]*.un~
+lib/index.js
+lib/index.js.map
