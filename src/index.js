@@ -14,12 +14,14 @@ class EnvHelper {
     this._envLabelMap = {
       development: ["dev", "develop", "development"],
       testing: ["test", "testing"],
+      staging: ["stage", "staging"],
       production: ["pub", "public", "prod", "production", "ol", "online"],
-      local: ["my", "local"]
+      local: ["my", "local", "loc"]
     };
     this._envLabelPrefixMap = {
       development: "dev-",
       testing: "test-",
+      staging: "stage-",
       production: "",
       local: "my-"
     };
