@@ -12,6 +12,9 @@ describe("envLabelMap test", () => {
     envhelper.setEnvLabelMap({
       development: ["dev", "develop", "development"],
       testing: ["test", "testing"],
+      staging: ["stage", "staging"],
+      qa: ["qa"],
+      pr: ["pr", "pre","prepare"],
       production: ["pub", "public", "prod", "production", "ol", "online"],
       local: ["my", "local"]
     });
@@ -21,6 +24,15 @@ describe("envLabelMap test", () => {
     expect(envhelper.getEnvLabels())
       .to.be.an("array")
       .that.includes("testing");
+    expect(envhelper.getEnvLabels())
+      .to.be.an("array")
+      .that.includes("qa");
+    expect(envhelper.getEnvLabels())
+      .to.be.an("array")
+      .that.includes("pr");
+    expect(envhelper.getEnvLabels())
+      .to.be.an("array")
+      .that.includes("staging");
     expect(envhelper.getEnvLabels())
       .to.be.an("array")
       .that.includes("production");
@@ -33,6 +45,9 @@ describe("envLabelMap test", () => {
       development: "development",
       test: "testing",
       testing: "testing",
+      qa: "qa",
+      pr: "pr",
+      pre: "pr",
       pub: "production",
       public: "production",
       prod: "production",
@@ -55,6 +70,9 @@ describe("fixEnv test", () => {
   it("fixEnv test failed", () => {
     expect(envhelper.fixEnv("test")).to.be.equal("testing");
   });
+  it("fixEnv test failed", () => {
+    expect(envhelper.fixEnv("pre")).to.be.equal("pr");
+  });
   it("fixEnv prod failed", () => {
     expect(envhelper.fixEnv("pub")).to.be.equal("production");
   });
@@ -73,6 +91,9 @@ describe("envPrefix test", () => {
   it("envPrefix test failed", () => {
     expect(envhelper.envPrefix("testing")).to.be.equal("test-");
   });
+  it("envPrefix test failed", () => {
+    expect(envhelper.envPrefix("pr")).to.be.equal("pr-");
+  });
   it("envPrefix prod failed", () => {
     expect(envhelper.envPrefix("pub")).to.be.equal("");
   });
@@ -87,6 +108,9 @@ describe("prefixEnv test", () => {
   });
   it("prefixEnv test failed", () => {
     expect(envhelper.prefixEnv("test-")).to.be.equal("testing");
+  });
+  it("prefixEnv test failed", () => {
+    expect(envhelper.prefixEnv("pr-")).to.be.equal("pr");
   });
   it("prefixEnv prod failed", () => {
     expect(envhelper.prefixEnv("")).to.be.equal("production");
@@ -114,6 +138,13 @@ describe("detectUrlPrefix test", () => {
         "http://test-sub.example.com/path/action?querystring=value#fragment"
       )
     ).to.be.equal("test-");
+  });
+  it("detectUrlPrefix test failed", () => {
+    expect(
+      envhelper.detectUrlPrefix(
+        "http://pr-sub.example.com/path/action?querystring=value#fragment"
+      )
+    ).to.be.equal("pr-");
   });
   it("detectUrlPrefix prod failed", () => {
     expect(
@@ -146,6 +177,13 @@ describe("detectEnvByUrl test", () => {
       )
     ).to.be.equal("testing");
   });
+  it("detectEnvByUrl local failed", () => {
+    expect(
+      envhelper.detectEnvByUrl(
+        "http://pr-sub.example.com/path/action?querystring=value#fragment"
+      )
+    ).to.be.equal("pr");
+  });
   it("detectEnvByUrl prod failed", () => {
     expect(
       envhelper.detectEnvByUrl(
@@ -160,6 +198,11 @@ describe("genEnvUrlByTplUrl test", () => {
   it("genEnvUrlByTplUrl local failed", () => {
     expect(envhelper.genEnvUrlByTplUrl(mockupTplUrl, "local")).to.be.equal(
       "http://my-mockup.example.com"
+    );
+  });
+  it("genEnvUrlByTplUrl local failed", () => {
+    expect(envhelper.genEnvUrlByTplUrl(mockupTplUrl, "pr")).to.be.equal(
+      "http://pr-mockup.example.com"
     );
   });
   it("genEnvUrlByTplUrl dev failed", () => {
@@ -180,6 +223,11 @@ describe("genEnvUrlByTplUrl test", () => {
 });
 
 describe("genEnvUrlByWebUrl test", () => {
+  it("genEnvUrlByWebUrl local failed", () => {
+    expect(
+      envhelper.genEnvUrlByWebUrl("http://prod-mockup.example.com", "pr")
+    ).to.be.equal("http://pr-mockup.example.com");
+  });
   it("genEnvUrlByWebUrl local failed", () => {
     expect(
       envhelper.genEnvUrlByWebUrl("http://prod-mockup.example.com", "local")
