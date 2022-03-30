@@ -14,7 +14,7 @@ describe("envLabelMap test", () => {
       testing: ["test", "testing"],
       staging: ["stage", "staging"],
       qa: ["qa"],
-      pr: ["pr", "pre","prepare"],
+      pr: ["pr", "pre", "prepare"],
       production: ["pub", "public", "prod", "production", "ol", "online"],
       local: ["my", "local"]
     });
@@ -48,6 +48,9 @@ describe("envLabelMap test", () => {
       qa: "qa",
       pr: "pr",
       pre: "pr",
+      prepare: "pr",
+      stage: "staging",
+      staging: "staging",
       pub: "production",
       public: "production",
       prod: "production",
@@ -55,6 +58,7 @@ describe("envLabelMap test", () => {
       ol: "production",
       online: "production",
       my: "local",
+      loc: "local",
       local: "local"
     });
   });
