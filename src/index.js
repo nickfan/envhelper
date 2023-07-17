@@ -15,7 +15,7 @@ class EnvHelper {
       development: ["dev", "develop", "development"],
       testing: ["test", "testing"],
       staging: ["stage", "staging"],
-      qa: ["qa", "qax", "qa1", "qa2", "qa3", "qa4", "qa5"],
+      qa4: ["qa", "qax", "qa1", "qa2", "qa3", "qa4", "qa5"],
       pr: ["pr", "pre", "prepare"],
       production: ["pub", "public", "prod", "production", "ol", "online"],
       local: ["my", "local", "loc"]
@@ -24,7 +24,7 @@ class EnvHelper {
       development: "dev-",
       testing: "test-",
       staging: "stage-",
-      qa: "qa-",
+      qa4: "qa4-",
       pr: "pr-",
       production: "",
       local: "my-"
