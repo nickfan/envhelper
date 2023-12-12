@@ -17,7 +17,15 @@ class EnvHelper {
       staging: ["stage", "staging"],
       qa4: ["qa", "qax", "qa1", "qa2", "qa3", "qa4", "qa5"],
       pr: ["pr", "pre", "prepare"],
-      production: ["pub", "public", "prod", "production", "ol", "online"],
+      production: [
+        "pro",
+        "pub",
+        "public",
+        "prod",
+        "production",
+        "ol",
+        "online"
+      ],
       local: ["my", "local", "loc"]
     };
     this._envLabelPrefixMap = {
