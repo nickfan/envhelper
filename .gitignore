@@ -219,3 +219,4 @@ tags
 [._]*.un~
 lib/index.js
 lib/index.js.map
+/.devcontainer.json

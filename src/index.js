@@ -296,6 +296,94 @@ class EnvHelper {
     }
     return webUrl;
   }
+
+  /**
+   * Generate dyetag and env prefix url by web url
+   *
+   * @param {string} webUrl web url that may contains other env url prefix
+   * @param {string} env env label
+   * @param {string} dyeTag dyeTag label
+   * @returns {string|*} generated env prefix url
+   */
+  genDyeTagEnvUrlByWebUrl(webUrl, env, dyeTag) {
+    if (webUrl) {
+      let prefix = this.envPrefix(env);
+      let pos = webUrl.indexOf("://");
+      if (pos !== -1) {
+        let subDomainDotPos = webUrl.slice(pos + 3).indexOf(".");
+        if (subDomainDotPos !== -1) {
+          let subDomainPart = webUrl.slice(pos + 3, pos + 3 + subDomainDotPos);
+          let dashPos = subDomainPart.indexOf("-");
+          if (dashPos !== -1) {
+            let prefixDetect = subDomainPart.slice(0, dashPos + 1);
+            let prefixSegment = prefixDetect.slice(0, -1);
+            let envAliasLabelMap = this.getEnvAliasLabelMap();
+            if (Object.keys(envAliasLabelMap).includes(prefixSegment)) {
+              if (dyeTag) {
+                return (
+                  webUrl.slice(0, pos + 3) +
+                  dyeTag +
+                  "-" +
+                  prefix +
+                  webUrl.slice(pos + 3 + prefixDetect.length)
+                );
+              }
+              return (
+                webUrl.slice(0, pos + 3) +
+                prefix +
+                webUrl.slice(pos + 3 + prefixDetect.length)
+              );
+            }
+          }
+          return webUrl.slice(0, pos + 3) + prefix + webUrl.slice(pos + 3);
+        }
+      }
+    }
+    return webUrl;
+  }
+
+  /**
+   * Extract dyePrefix and envPrefix from subpart of host
+   * @param subpart
+   * @param appSub
+   * @returns {(string|string|*)[]|string[]}
+   */
+  extractPrefixesBySubpart(subpart, appSub) {
+    if (subpart === appSub) {
+      return ["", ""];
+    }
+
+    let prefixPart = subpart.endsWith(appSub)
+      ? subpart.slice(0, -appSub.length - 1)
+      : subpart;
+
+    let matches = prefixPart.match(/^(.*)-(.*)-$/);
+    let dyePrefix;
+    let envPrefix;
+
+    if (matches) {
+      dyePrefix = matches[1];
+      envPrefix = matches[2];
+    } else {
+      matches = prefixPart.match(/^(.*)-$/);
+      dyePrefix = "";
+      envPrefix = matches ? matches[1] : "";
+    }
+    return [dyePrefix || "", envPrefix || ""];
+  }
+
+  /**
+   * Extract dyePrefix and envPrefix from webUrl
+   * @param webUrl
+   * @param appSub
+   * @returns {(string|*)[]|string[]}
+   */
+  extractPrefixesByUrl(webUrl, appSub) {
+    const parsedUrl = new URL(webUrl);
+    const hostname = parsedUrl.hostname;
+    const subDomain = hostname.split(".")[0];
+    return this.extractPrefixesBySubpart(subDomain, appSub);
+  }
 }
 const envhelper = EnvHelper.getInstance();
 export { envhelper, EnvHelper };
