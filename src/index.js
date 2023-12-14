@@ -373,6 +373,17 @@ class EnvHelper {
   }
 
   /**
+   * Extract dyePrefix and envPrefix from hostname
+   * @param hostname
+   * @param appSub
+   * @returns {(string|*)[]|string[]}
+   */
+  extractPrefixesByHostname(hostname, appSub) {
+    const subDomain = hostname.split(".")[0];
+    return this.extractPrefixesBySubpart(subDomain, appSub);
+  }
+
+  /**
    * Extract dyePrefix and envPrefix from webUrl
    * @param webUrl
    * @param appSub
