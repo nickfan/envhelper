@@ -373,7 +373,7 @@ class EnvHelper {
   }
 
   /**
-   * Extract dyePrefix and envPrefix from hostname
+   * Extract dyePrefix and envPrefix from hostname.
    * @param hostname
    * @param appSub
    * @returns {(string|*)[]|string[]}
